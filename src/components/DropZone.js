@@ -162,7 +162,8 @@ const DropZone = () => {
           ""
         )}
         {unsupportedFiles.length ? (
-          <p>Please remove all unsupported files.</p>
+          <p className="errorMelding">Fjern alle filer som ikke er støttet. 
+          De støttede filtypene er; jpeg, jpg, png, gif, x-icon, tif og heic</p>
         ) : (
           ""
         )}

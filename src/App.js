@@ -4,9 +4,12 @@ import {Map, TileLayer, Marker, Popup, Polygon} from 'react-leaflet';
 import {Card, CardText, CardTitle} from 'reactstrap';
 import Select from "react-select";
 import Control from 'react-leaflet-control';
-import RangeSlider from 'react-bootstrap-range-slider';
 import MultiSelect from './components/MultiSelect';
 import DropZone from './components/DropZone';
+import Datepicker from './components/DatePicker';
+import OverlayInfo from './components/InfoTooltips/OverlayInfo';
+import DateTooltip from './components/InfoTooltips/DateTooltip';
+import AreaTooltip from './components/InfoTooltips/AreaTooltip';
 import './App.css';
 
 //Forskjellige ikoner
@@ -32,6 +35,13 @@ const projectOptions = [
   //Legge til resterende
 ];
 
+const areaOptions = [
+  {value: [63.551440, 10.933473], label: 'Holvegen'},
+  {value: [58.093886,7.644329], label: 'Østre tunnel'},
+  {value: [59.001439, 9.613338], label: 'Resterende'}
+  //Legge til resterende
+];
+
 const polygonE6KAA = [
   [63.490113, 10.881942],
   [63.539078, 10.784397],
@@ -54,20 +64,7 @@ const polygonE39M = [
   [58.089601, 7.804134]
 ];
 
-const SimpleSlider = () => {
 
-  const [ value, setValue ] = React.useState(2016);
-
-  return (
-    <RangeSlider
-      value={value}
-      min={1974}
-      max={2020}
-      onChange={e => setValue(e.target.value)}
-    />
-  );
-
-};
 
 export default class App extends Component {
  
@@ -106,9 +103,12 @@ export default class App extends Component {
           lat: position.coords.latitude,
           lng: position.coords.longitude
         },
+        position: {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        },
         haveUsersLocation: true,
         zoom: 11,
-        zoomTo: 11,
       });
     }, () => {
       console.log("Får ikke tak i posisjonen til brukeren...");
@@ -122,7 +122,6 @@ export default class App extends Component {
             },
             haveUsersLocation: true,
             zoom: 11,
-            zoomTo: 11,
           });
         });
     });
@@ -132,7 +131,6 @@ export default class App extends Component {
   render(){
     const position = [this.state.location.lat, this.state.location.lng];
     const { selectedOption, positionMarker } = this.state;
-
 
     return(
       <div className="app">
@@ -153,59 +151,27 @@ export default class App extends Component {
               Din posisjon:)
             </Popup>
           </Marker>
-          <Marker 
-            position={[63.498121,10.874268]}
-            icon={myIcon}
-          >
-            <Popup>
-              Eksempel
-            </Popup>
-          </Marker>
-          <Marker 
-            position={[63.498351,10.872980]}
-            icon={myIcon}
-          >
-            <Popup>
-              Eksempel
-            </Popup>
-          </Marker>
-          <Marker 
-            position={[63.500945,10.863390]}
-            icon={myIcon}
-          >
-            <Popup>
-              Eksempel
-            </Popup>
-          </Marker>
-          <Marker 
-            position={[63.588755,11.022750]}
-            icon={myIcon}
-          >
-            <Popup>
-              Eksempel
-            </Popup>
-          </Marker>
+          
           <Polygon 
-          onclick={ () => this.setState({position: [63.551440, 10.933473], zoomTo: 11})} 
+          onclick={ () => this.setState({location: [63.551440, 10.933473], zoom: 11})} 
           color={'blue'} 
           positions={polygonE6KAA}
         />
         <Polygon 
-          onclick={ () => this.setState({position: [59.001439, 9.613338], zoomTo: 11})} 
-          color={'red'} 
+          onclick={ () => this.setState({location: [59.001439, 9.613338], zoom: 11})} 
+          color={'#d46504'} 
           positions={polygonE18RD}
         />
         <Polygon 
-          onclick={ () => this.setState({position: [58.093886,7.644329], zoomTo: 11})} 
+          onclick={ () => this.setState({location: [58.093886,7.644329], zoom: 11})} 
           color={'blue'} 
           positions={polygonE39M}
         />
-        
-          
         </Map>
+
         <Card className="message-form">
           <CardTitle className="title">Bildelagring</CardTitle>
-          <CardText>Velg prosjekt:</CardText>
+          <OverlayInfo/>
           <Select
               className="select-option"
               value={selectedOption}
@@ -214,13 +180,20 @@ export default class App extends Component {
               placeholder='velg prosjekt'
               menuColor='blue'
             />
+            <AreaTooltip/>
+            <Select
+              className="selected-area"
+              options={areaOptions}
+              placeholder='velg område'
+              menuColor='blue'
+            />
 
             <CardText>Sorter på kategorier:</CardText>
             <MultiSelect 
               className="multi-select"
             />
-            <CardText>Sorter på dato:</CardText>
-            <SimpleSlider/>
+            <DateTooltip/>
+            <Datepicker/>
             <br></br>
             <CardText>Last oppp bilder:</CardText>
             <DropZone/>

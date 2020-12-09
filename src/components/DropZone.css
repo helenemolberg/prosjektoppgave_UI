@@ -85,6 +85,9 @@
 .file-error-message {
     color: red;
 }
+.errorMelding {
+    font-size: 12px;
+}
 
 .file-type-logo {
     width: 25px;

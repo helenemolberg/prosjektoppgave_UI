@@ -14,7 +14,7 @@ export default function MultiSelect() {
     const [options, setOptions] = useState([
         {value: 'vvs', label: 'VVS'},
         {value: 'bro', label: 'Bro'},
-        {value: 'veg', label: 'Veg'},
+        {value: 'vei', label: 'Vei'},
         {value: 'ruh', label: 'RUH'},
         {value: 'parsellnr', label: 'Parsellnummer'},
         {value: 'marked', label: 'Marked/Annonsebilder'},
