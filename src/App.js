@@ -10,6 +10,7 @@ import Datepicker from './components/DatePicker';
 import OverlayInfo from './components/InfoTooltips/OverlayInfo';
 import DateTooltip from './components/InfoTooltips/DateTooltip';
 import AreaTooltip from './components/InfoTooltips/AreaTooltip';
+import MultiSelectTooltip from './components/InfoTooltips/MultiSelectTooltip';
 import './App.css';
 
 //Forskjellige ikoner
@@ -79,7 +80,6 @@ export default class App extends Component {
     },
     zoom: 5,
     selectedOption: null,
-    sliderValue: 2016,
   }
 
   
@@ -108,7 +108,6 @@ export default class App extends Component {
           lng: position.coords.longitude
         },
         haveUsersLocation: true,
-        zoom: 11,
       });
     }, () => {
       console.log("Får ikke tak i posisjonen til brukeren...");
@@ -121,7 +120,6 @@ export default class App extends Component {
               lng: location.longitude
             },
             haveUsersLocation: true,
-            zoom: 11,
           });
         });
     });
@@ -153,17 +151,32 @@ export default class App extends Component {
           </Marker>
           
           <Polygon 
-          onclick={ () => this.setState({location: [63.551440, 10.933473], zoom: 11})} 
+          onclick={ () => this.setState({
+            location: {
+              lat: 63.551440, 
+              lng: 10.933473
+            }, 
+            zoom: 11,})} 
           color={'blue'} 
           positions={polygonE6KAA}
         />
         <Polygon 
-          onclick={ () => this.setState({location: [59.001439, 9.613338], zoom: 11})} 
+          onclick={ () => this.setState({
+            location: {
+              lat: 59.001439, 
+              lng: 9.613338
+            }, 
+            zoom: 11})} 
           color={'#d46504'} 
           positions={polygonE18RD}
         />
         <Polygon 
-          onclick={ () => this.setState({location: [58.093886,7.644329], zoom: 11})} 
+          onclick={ () => this.setState({
+            location: {
+              lat: 58.093886,
+              lng: 7.644329
+            }, 
+            zoom: 11})} 
           color={'blue'} 
           positions={polygonE39M}
         />
@@ -182,13 +195,13 @@ export default class App extends Component {
             />
             <AreaTooltip/>
             <Select
-              className="selected-area"
+              className="select-area"
               options={areaOptions}
               placeholder='velg område'
               menuColor='blue'
             />
 
-            <CardText>Sorter på kategorier:</CardText>
+            <MultiSelectTooltip/>
             <MultiSelect 
               className="multi-select"
             />

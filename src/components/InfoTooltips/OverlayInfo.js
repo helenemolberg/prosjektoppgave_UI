@@ -8,9 +8,9 @@ const OverlayInfo = (props) => {
 
   return (
     <div>
-      <p>Velg prosjekt: <span style={{textDecoration: "underline", color:"blue"}} href="#" id="TooltipExample">(info)</span></p>
-      <Tooltip placement="top" isOpen={tooltipOpen} target="TooltipExample" toggle={toggle}>
-        Velg ønsket prosjekt du vil se bildefiler for
+      <p>Velg prosjekt: <span style={{textDecoration: "underline", color:"blue"}} href="#" id="Prosjekt">(info)</span></p>
+      <Tooltip placement="top" isOpen={tooltipOpen} target="Prosjekt" toggle={toggle}>
+        Velg prosjekt du vil sortere filene for
       </Tooltip>
     </div>
   );
