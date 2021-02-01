@@ -140,15 +140,18 @@ export default class App extends Component {
           <Control position="topleft">
           < button onClick={this.getPositionOfUser}>Min <br></br>Posisjon</button>
           </Control>
-          <Marker 
-            position={positionMarker}
-            icon={myIcon}
-            color={'red'}
-          >
+          {
+            this.state.haveUsersLocation ?
+            <Marker 
+              position={positionMarker}
+              icon={myIcon}
+            >
             <Popup>
               Din posisjon:)
             </Popup>
-          </Marker>
+            </Marker> : ''
+          }
+          
           
           <Polygon 
           onclick={ () => this.setState({
