@@ -10,7 +10,7 @@ const OverlayInfo = (props) => {
     <div>
       <p>Velg prosjekt: <span style={{textDecoration: "underline", color:"blue"}} href="#" id="Prosjekt">(info)</span></p>
       <Tooltip placement="top" isOpen={tooltipOpen} target="Prosjekt" toggle={toggle}>
-        Velg prosjekt du vil sortere filene for
+        Velg prosjekt du vil sortere bildefilene for
       </Tooltip>
     </div>
   );

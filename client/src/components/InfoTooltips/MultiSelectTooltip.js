@@ -10,7 +10,7 @@ const MultiSelectTooltip = (props) => {
     <div>
       <p>Sorter på kategorier: <span style={{textDecoration: "underline", color:"blue"}} href="#" id="Multi">(info)</span></p>
       <Tooltip placement="top" isOpen={toolOpen} target="Multi" toggle={toggle}>
-        Velg kategori/er du ønsker å sortere filene på.
+        Velg kategori/er du ønsker å sortere bildefilene på
       </Tooltip>
     </div>
   );

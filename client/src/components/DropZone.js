@@ -3,7 +3,7 @@ import exifr from 'exifr'
 import "./DropZone.css";
 
 const DropZone = () => {
-    const fileInputRef = useRef();
+  const fileInputRef = useRef();
   const modalImageRef = useRef();
   const modalRef = useRef();
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -73,15 +73,14 @@ const DropZone = () => {
       "image/jpeg",
       "image/jpg",
       "image/png",
-      "image/gif",
-      "image/x-icon",
       "image/tif",
       "image/heic",
     ];
-    if (validTypes.indexOf(file.type) == -1) {
+    if (validTypes.indexOf(file.type) === -1) {
       return false;
     }
-    exifr.gps(file).then((test) => console.log(test))
+    //Henter ut coord. til bildene 
+    exifr.gps(file).then((test) => console.log(test));
     return true;
   };
 
@@ -147,6 +146,7 @@ const DropZone = () => {
       }
   }
 
+  //Må ordne opplastning til databasen herfra!! 
   const uploadFiles = () => {
 
   }
@@ -163,7 +163,7 @@ const DropZone = () => {
         )}
         {unsupportedFiles.length ? (
           <p className="errorMelding">Fjern alle filer som ikke er støttet. 
-          De støttede filtypene er; jpeg, jpg, png, gif, x-icon, tif og heic</p>
+          De støttede filtypene er; jpeg, jpg, png, tif og heic</p>
         ) : (
           ""
         )}
@@ -184,6 +184,7 @@ const DropZone = () => {
             ref={fileInputRef}
             className="file-input"
             type="file"
+            name="file"
             multiple
             onChange={filesSelected}
           />
