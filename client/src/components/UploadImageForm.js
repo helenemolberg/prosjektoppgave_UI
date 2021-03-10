@@ -50,9 +50,11 @@ const UploadImageForm = () => {
     //Lagrer dato fra lastModifiedDate -> er den nøyaktig nok??
     userFile.captureDate = new Date(imageFile.lastModifiedDate);
 
+    //Sjekke om det finnes gps-verdier i filen
+    let exifrOutput = await exifr.gps(imageFile).catch(console.error)
     
     //Henter EXIFR verdiene fra funksjonen som parser
-    if (exifr.gps(imageFile)){
+    if (exifrOutput != null){
       userFile.latitude = (await exifr.gps(imageFile)).latitude;
       userFile.longitude = (await exifr.gps(imageFile)).longitude;
       //må hente ut disse for så å hente ut verdiene fra arrayen
@@ -80,17 +82,6 @@ const UploadImageForm = () => {
       }
     }
 
-    /*
-    userFile.latitude = (await exifr.gps(imageFile)).latitude;
-    userFile.longitude = (await exifr.gps(imageFile)).longitude;
-    //må hente ut disse for så å hente ut verdiene fra arrayen
-    const gpsAlt = await exifr.parse(imageFile, ["GPSAltitude"]);
-    const gpsDirection = await exifr.parse(imageFile, ["GPSImgDirection"]);
-
-    userFile.GPSAltitude = gpsAlt.GPSAltitude;
-    userFile.GPSImgDirection = gpsDirection.GPSImgDirection;
-    */
-
     formData.append("imageType", userFile.imageType);
     formData.append("imageName", userFile.imageName);
     formData.append("latitude", userFile.latitude);
@@ -105,12 +96,11 @@ const UploadImageForm = () => {
     console.log("Structure of formdata" + [...formData]);
 
     //Sends userFile to API -> DB
-    /*
     try {
       await sendFile(formData);
     } catch (error) {
       console.error(error);
-    }*/
+    }
 
   };
 
