@@ -15,6 +15,7 @@ import MultiSelectTooltip from './components/InfoTooltips/MultiSelectTooltip';
 import UploadImageForm from './components/UploadImageForm';
 import { positionMarker, gpsDirectionMarker} from './components/Markers';
 import './App.css';
+// Roterer markører 
 import 'leaflet-rotatedmarker';
 
 import { getImages, getLocation, getFilesProject, getPictures } from './API';
@@ -153,7 +154,8 @@ class App extends Component {
                   key={image._id}
                   position={[image.latitude, image.longitude]}
                   icon={gpsDirectionMarker}
-                  rotationAngle={image.GPSImgDirection}>
+                  rotationAngle={image.GPSImgDirection}
+                >
                   <Popup>
                     <b>Prosjekt: </b>{image.prosjekt} {image.prosjektOmrade}<p/>
                     <b>Parsell: </b>{image.parsell}<p/>
